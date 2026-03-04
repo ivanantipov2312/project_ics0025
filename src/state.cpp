@@ -15,6 +15,8 @@ std::unique_ptr<State> OrderState::handle_events() const {
 	std::cout << "Please, fill out the ordering details: " << std::endl;
 
 	std::string last_name = InputManager::get_instance().get_string("Enter your last name: ");
+
+	// Menu for choosing type of order
 	Menu order_kind_selection{"Select the order type", {
 		"Photography",
 		"Post-production",
@@ -36,10 +38,12 @@ std::unique_ptr<State> OrderState::handle_events() const {
 			kind = OrderKind::FullService;
 			break;
 		default:
+			// Impossible case, check is ensured by Menu class
 			std::cout << "Invalid choice. Returning to the ordering menu..." << std::endl;
 			return std::make_unique<OrderState>(*this);
 	}
 
+	// Print the added data
 	std::cout << "Added Order with the following information: " << std::endl;
 	std::cout << "Customer last name: " << last_name << std::endl;
 	std::cout << "Chosen service: ";

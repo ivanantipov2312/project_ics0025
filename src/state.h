@@ -4,6 +4,7 @@
 #include "order.h"
 #include <memory>
 
+// Basic interface for states
 class State {
 public:
 	virtual std::unique_ptr<State> handle_events() const = 0;
