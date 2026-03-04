@@ -14,8 +14,9 @@ public:
 		return instance;
 	}
 
-	int get_int(int min, int max) {
+	int get_int(const std::string& prompt, int min, int max) {
 		while (true) {
+			std::cout << prompt;
 			int n;
 			std::cin >> n;
 		
@@ -29,8 +30,9 @@ public:
 		}
 	}
 
-	std::string get_string(bool can_be_empty) {
+	std::string get_string(const std::string& prompt, bool can_be_empty = false) {
 		while (true) {
+			std::cout << prompt;
 			std::string str;
 			std::cin >> str;
 
@@ -40,6 +42,19 @@ public:
 			}
 
 			return str;
+		}
+	}
+
+	bool get_yes_or_no(const std::string& prompt) {
+		while (true) {
+			char c;
+			std::cin >> c;
+
+			if (c != 'y' && c != 'n') {
+				continue;
+			}
+
+			return c == 'y';
 		}
 	}
 private:
