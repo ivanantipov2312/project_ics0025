@@ -47,6 +47,7 @@ public:
 
 	bool get_yes_or_no(const std::string& prompt) {
 		while (true) {
+			std::cout << prompt;
 			char c;
 			std::cin >> c;
 

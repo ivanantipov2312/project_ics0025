@@ -12,7 +12,9 @@ std::unique_ptr<State> MainState::handle_events() const {
 }	
 
 std::unique_ptr<State> OrderState::handle_events() const {
-	std::string last_name = InputManager::get_instance().get_string("Enter your last name");
+	std::cout << "Please, fill out the ordering details: " << std::endl;
+
+	std::string last_name = InputManager::get_instance().get_string("Enter your last name: ");
 	Menu order_kind_selection{"Select the order type", {
 		"Photography",
 		"Post-production",
@@ -38,7 +40,22 @@ std::unique_ptr<State> OrderState::handle_events() const {
 			return std::make_unique<OrderState>(*this);
 	}
 
-	bool finished = InputManager::get_instance().get_yes_or_no("");
+	std::cout << "Added Order with the following information: " << std::endl;
+	std::cout << "Customer last name: " << last_name << std::endl;
+	std::cout << "Chosen service: ";
+	switch (kind) {
+	case OrderKind::Photography:
+		std::cout << "Photography" << std::endl;
+		break;
+	case OrderKind::PostProduction:
+		std::cout << "PostProduction" << std::endl;
+		break;
+	case OrderKind::FullService:
+		std::cout << "FullService" << std::endl;
+		break;
+	}
+
+	bool finished = InputManager::get_instance().get_yes_or_no("Stop ordering? (y/n): ");
 
 	if (finished) {
 		return std::make_unique<MainState>(MainState{});
