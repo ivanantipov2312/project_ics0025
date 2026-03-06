@@ -1,5 +1,7 @@
 #include "state.h"
 #include "../managers/order_mananger.h"
+#include "../managers/logger.h"
+#include "../managers/input_manager.h"
 
 std::unique_ptr<State> MainState::handle_events() const {
 	int opt = menu.get_option();
@@ -11,7 +13,14 @@ std::unique_ptr<State> MainState::handle_events() const {
 		for (const auto& el : q) {
 			el.print();
 		}
-	} else if (opt == 4) {
+	}
+	else if (opt == 4) {
+		std::string filepath = InputManager::get_instance().get_string("Enter filepath: ");
+		auto q = OrderManager::get_instance().get_queue();
+		for (const auto& el : q) {
+			Logger::get_instance(filepath).log(el.to_string());
+		}
+	} else if (opt == 5) {
 		return std::make_unique<ExitState>(ExitState{});
 	}
 	return std::make_unique<MainState>(*this);
@@ -49,7 +58,9 @@ std::unique_ptr<State> OrderState::handle_events() const {
 			return std::make_unique<OrderState>(*this);
 	}
 
-	Order order{last_name, kind};
+	bool is_urgent = InputManager::get_instance().get_yes_or_no("Mark as urgent? (y/n): ");
+
+	Order order{last_name, kind, is_urgent};
 	OrderManager::get_instance().add_order(order);
 
 	// Print the added data
