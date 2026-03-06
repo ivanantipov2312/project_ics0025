@@ -1,0 +1,4 @@
+#ifndef PHOTOGRAPHER_H_
+#define PHOTOGRAPHER_H_
+
+#endif // PHOTOGRAPHER_H_

@@ -1,11 +1,17 @@
 #include "state.h"
+#include "../managers/order_mananger.h"
 
 std::unique_ptr<State> MainState::handle_events() const {
 	int opt = menu.get_option();
 	if (opt == 1) {
 		return std::make_unique<OrderState>(OrderState{});
-	}
-	if (opt == 4) {
+	} else if (opt == 2) {
+		auto q = OrderManager::get_instance().get_queue();
+		std::cout << "Your orders: " << std::endl;
+		for (const auto& el : q) {
+			el.print();
+		}
+	} else if (opt == 4) {
 		return std::make_unique<ExitState>(ExitState{});
 	}
 	return std::make_unique<MainState>(*this);
@@ -43,21 +49,12 @@ std::unique_ptr<State> OrderState::handle_events() const {
 			return std::make_unique<OrderState>(*this);
 	}
 
+	Order order{last_name, kind};
+	OrderManager::get_instance().add_order(order);
+
 	// Print the added data
 	std::cout << "Added Order with the following information: " << std::endl;
-	std::cout << "Customer last name: " << last_name << std::endl;
-	std::cout << "Chosen service: ";
-	switch (kind) {
-	case OrderKind::Photography:
-		std::cout << "Photography" << std::endl;
-		break;
-	case OrderKind::PostProduction:
-		std::cout << "PostProduction" << std::endl;
-		break;
-	case OrderKind::FullService:
-		std::cout << "FullService" << std::endl;
-		break;
-	}
+	order.print();
 
 	bool finished = InputManager::get_instance().get_yes_or_no("Stop ordering? (y/n): ");
 
