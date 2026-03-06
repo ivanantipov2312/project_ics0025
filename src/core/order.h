@@ -9,8 +9,16 @@ enum class OrderKind {
 	FullService,
 };
 
+inline std::string order_kind_to_string(const OrderKind& kind) {
+	switch (kind) {
+		case OrderKind::Photography: return "Photography";
+		case OrderKind::PostProduction: return "Post production";
+		case OrderKind::FullService: return "Full service";
+		default: return ""; // Impossible case, ensured by enum variants
+	}
+}
+
 // TODO: Add more details/data
-// TODO: Add some global or static queue
 struct Order {
 	std::string customer_last_name{};
 	OrderKind kind{};
@@ -19,19 +27,15 @@ struct Order {
 	void print() const {
 		std::cout << "Order details: " << std::endl;
 		std::cout << "Customer's last name: " << customer_last_name << std::endl;
-		std::cout << "Order kind: ";
-		switch (kind) {
-		case OrderKind::Photography:
-			std::cout << "Photography";
-			break;
-		case OrderKind::PostProduction:
-			std::cout << "Post-production";
-			break;
-		case OrderKind::FullService:
-			std::cout << "Full service";
-			break;
-		}
-		std::cout << std::endl;
+		std::cout << "Order kind: " << order_kind_to_string(kind) << std::endl;
+		std::cout << "Is urgent? " << (is_urgent ? "Yes" : "No") << std::endl;
+	}
+
+	std::string to_string() const {
+		return "Order details:\n"
+			"Customer's last name: " + customer_last_name + '\n' +
+			"Order Kind: " + order_kind_to_string(kind) + '\n' +
+			"Is urgent? " + (is_urgent ? "Yes" : "No") + '\n';
 	}
 };
 
