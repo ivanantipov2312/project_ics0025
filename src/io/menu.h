@@ -30,6 +30,7 @@ public:
 		"Place an order",
 		"See current orders from you",
 		"List all photographers",
+		"Save your current list of orders",
 		"Quit"
 	}}) {}
 };
