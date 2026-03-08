@@ -10,6 +10,8 @@ public:
 	void run() {
 		while (is_running) {
 			current_state->render();
+
+			// If got any state, switch to it. Exit otherwise
 			auto next_state = current_state->handle_events();
 			if (!next_state) {
 				is_running = false;

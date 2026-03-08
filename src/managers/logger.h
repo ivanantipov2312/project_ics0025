@@ -4,8 +4,10 @@
 #include <iostream>
 #include <string>
 
+// Simple logger for abstracting file input
 class Logger {
 public:
+	// Disallow any copying of objects of this class
 	Logger(const Logger&) = delete;
 	Logger& operator=(const Logger&) = delete;
 
@@ -26,6 +28,7 @@ public:
 		stream.clear();
 	}
 private:
+	// Disallow manual construction of the objects (only through get_instance())
 	Logger(const std::string& filepath) : stream{filepath} {}
 	~Logger() { stream.close(); }
 	std::ofstream stream{};

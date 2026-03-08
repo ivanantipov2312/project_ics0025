@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 
+// TODO: Refactor this into builder pattern if makes sense
+// Simple class for quick creation of menus
 class Menu {
 public:
 	Menu(const std::string& name, const std::vector<std::string>& options)

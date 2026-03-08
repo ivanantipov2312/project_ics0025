@@ -3,8 +3,10 @@
 #include "../core/order.h"
 #include <deque>
 
+// Global static queue for orders
 class OrderManager {
 public:
+	// Disallow any copying of objects of this class
 	OrderManager(const OrderManager&) = delete;
 	OrderManager& operator=(const OrderManager&) = delete;
 
@@ -27,6 +29,7 @@ public:
 		return current_item;
 	}
 private:
+	// Disallow manual construction of the objects (only through get_instance())
 	OrderManager() {}
 	~OrderManager() {}
 	std::deque<Order> order_queue;

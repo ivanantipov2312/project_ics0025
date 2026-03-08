@@ -5,7 +5,7 @@
 // Singleton for getting input
 class InputManager {
 public:
-	// Disallow any copying of the class
+	// Disallow any copying of objects of this class
 	InputManager(const InputManager&) = delete;
 	InputManager& operator=(const InputManager&) = delete;
 
@@ -45,17 +45,18 @@ public:
 		}
 	}
 
-	bool get_yes_or_no(const std::string& prompt) {
+	// Useful for "Continue (y/n)" questions
+	bool get_yes_or_no(const std::string& prompt, char yes_char = 'y', char no_char = 'n') {
 		while (true) {
 			std::cout << prompt;
 			char c;
 			std::cin >> c;
 
-			if (c != 'y' && c != 'n') {
+			if (c != yes_char && c != no_char) {
 				continue;
 			}
 
-			return c == 'y';
+			return c == yes_char;
 		}
 	}
 private:

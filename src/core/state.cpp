@@ -5,22 +5,25 @@
 
 std::unique_ptr<State> MainState::handle_events() const {
 	int opt = menu.get_option();
-	if (opt == 1) {
+	if (opt == 1) { // Order
 		return std::make_unique<OrderState>(OrderState{});
-	} else if (opt == 2) {
+	} else if (opt == 2) { // List orders
 		auto q = OrderManager::get_instance().get_queue();
 		std::cout << "Your orders: " << std::endl;
 		for (const auto& el : q) {
 			el.print();
 		}
+	} else if (opt == 3) { // List photographers
+		// TODO: Add photographer logic here
+		std::cout << "This functionality is not implemented yet!";
 	}
-	else if (opt == 4) {
+	else if (opt == 4) { // Save current ordering list
 		std::string filepath = InputManager::get_instance().get_string("Enter filepath: ");
 		auto q = OrderManager::get_instance().get_queue();
 		for (const auto& el : q) {
 			Logger::get_instance(filepath).log(el.to_string());
 		}
-	} else if (opt == 5) {
+	} else if (opt == 5) { // Quit
 		return std::make_unique<ExitState>(ExitState{});
 	}
 	return std::make_unique<MainState>(*this);
