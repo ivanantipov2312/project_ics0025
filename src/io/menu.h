@@ -11,6 +11,7 @@ class Menu {
 public:
 	Menu(const std::string& name, const std::vector<std::string>& options)
 		: name{name}, options{options} {}
+
 	void render() const {
 		std::cout << name << ": " << std::endl;
 		for (int i = 0; i < options.size(); i++) {
@@ -24,25 +25,6 @@ public:
 private:
 	std::string name;
 	std::vector<std::string> options;
-};
-
-class MainMenu : public Menu {
-public:
-	MainMenu() : Menu({"Main Menu", {
-		"Place an order",
-		"See current orders from you",
-		"List all photographers",
-		"Save your current list of orders",
-		"Quit"
-	}}) {}
-};
-
-class OrderMenu : public Menu {
-public:
-	OrderMenu() : Menu({"Order placement", {
-		"Place an order",
-		"Quit"
-	}}) {}
 };
 
 #endif // MENU_H_

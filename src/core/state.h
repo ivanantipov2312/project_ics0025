@@ -20,6 +20,21 @@ public:
 	std::unique_ptr<State> handle_events() const override { return nullptr; }
 };
 
+class LoginState : public State {
+public:
+	void render() const override {
+		login_menu.render();
+	}
+
+	std::unique_ptr<State> handle_events() const override;
+private:
+	Menu login_menu{"Login", {
+		"Login",
+		"Register",
+		"Quit"
+	}};
+};
+
 // Main loop
 class MainState : public State {
 public:
@@ -28,7 +43,13 @@ public:
 	}
 	std::unique_ptr<State> handle_events() const override;
 private:
-	MainMenu menu{};
+	Menu menu{"Main Menu", {
+		"Place an order",
+		"See current orders from you",
+		"List all photographers",
+		"Save your current list of orders",
+		"Quit"
+	}};
 };
 
 // Ordering loop

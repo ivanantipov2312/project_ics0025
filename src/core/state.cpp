@@ -2,6 +2,40 @@
 #include "../managers/order_mananger.h"
 #include "../managers/logger.h"
 #include "../managers/input_manager.h"
+#include "../managers/user_manager.h"
+
+std::unique_ptr<State> LoginState::handle_events() const {
+	int opt = login_menu.get_option();
+		if (opt == 1) { // Login
+			std::string username = InputManager::get_instance().get_string("Username: ");
+			const User* user = UserManager::get_instance().get_user(username);
+			if (user == nullptr) {
+				std::cout << "No such user exists! Register!" << std::endl;
+				return std::make_unique<LoginState>(*this);
+			}
+
+			int attempts = 0;
+			while (attempts < 3) {
+				std::string password = InputManager::get_instance().get_string("Password: ");
+				if (user->password == password) {
+					return std::make_unique<MainState>(MainState{}); // If correct, transfer to the main state
+				}
+				std::cout << "Wrong password! (" << attempts << "/3 attempts): " << std::endl;
+				attempts++;
+			}
+		} else if (opt == 2) { // Register
+			std::string username = InputManager::get_instance().get_string("Enter your username: ");
+			std::string email = InputManager::get_instance().get_string("Enter your email: ");
+			std::string password = InputManager::get_instance().get_string("Enter your password: ");
+			bool is_photographer = InputManager::get_instance().get_yes_or_no("Are you a photographer? ");
+			User user = {username, email, password, is_photographer ? Role::Photographer : Role::Customer};
+			UserManager::get_instance().add_user(user);
+			return std::make_unique<MainState>(MainState{});
+		} else if (opt == 3) { // Exit
+			return std::make_unique<ExitState>(ExitState{});
+		}
+	return std::make_unique<LoginState>(*this);
+}
 
 std::unique_ptr<State> MainState::handle_events() const {
 	int opt = menu.get_option();

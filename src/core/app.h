@@ -21,7 +21,7 @@ public:
 		}
 	}
 private:
-	std::unique_ptr<State> current_state = std::make_unique<MainState>(MainState{});
+	std::unique_ptr<State> current_state = std::make_unique<LoginState>(LoginState{});
 	bool is_running = true;
 };
 
