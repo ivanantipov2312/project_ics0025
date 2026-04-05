@@ -35,6 +35,7 @@ private:
 	}};
 };
 
+// TODO: Add special menu for photographer
 // Main loop
 class MainState : public State {
 public:
@@ -48,6 +49,7 @@ private:
 		"See current orders from you",
 		"List all photographers",
 		"Save your current list of orders",
+		"Logout",
 		"Quit"
 	}};
 };

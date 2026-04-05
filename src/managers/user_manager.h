@@ -29,7 +29,17 @@ public:
 	}
 private:
 	// Disallow manual construction of the objects (only through get_instance())
-	UserManager() {}
+	UserManager() {
+		auto rows = reader.csv_get_rows();
+		for (const auto& row : rows) {
+			if (row.size() == 4) {
+				users.insert({
+					row.at(0),
+					{row.at(0), row.at(1), row.at(2), string_to_role(row.at(3))}
+				});
+			}
+		}
+	}
 	~UserManager() {}
 	std::map<std::string, User> users{};
 	FileReader reader{"../users.csv", {"Username", "Email", "Password","Role"}};

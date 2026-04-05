@@ -20,11 +20,16 @@ std::unique_ptr<State> LoginState::handle_events() const {
 				if (user->password == password) {
 					return std::make_unique<MainState>(MainState{}); // If correct, transfer to the main state
 				}
-				std::cout << "Wrong password! (" << attempts << "/3 attempts): " << std::endl;
+				std::cout << "Wrong password! (" << (attempts + 1) << "/3 attempts): " << std::endl;
 				attempts++;
 			}
 		} else if (opt == 2) { // Register
 			std::string username = InputManager::get_instance().get_string("Enter your username: ");
+			if (UserManager::get_instance().get_user(username) != nullptr) {
+				std::cout << "User with this username already exists!" << std::endl;
+				return std::make_unique<LoginState>(*this);
+			}
+
 			std::string email = InputManager::get_instance().get_string("Enter your email: ");
 			std::string password = InputManager::get_instance().get_string("Enter your password: ");
 			bool is_photographer = InputManager::get_instance().get_yes_or_no("Are you a photographer? ");
@@ -57,7 +62,9 @@ std::unique_ptr<State> MainState::handle_events() const {
 		for (const auto& el : q) {
 			Logger::get_instance(filepath).log(el.to_string());
 		}
-	} else if (opt == 5) { // Quit
+	} else if (opt == 5) { // Logout
+		return std::make_unique<LoginState>(LoginState{});
+	} else if (opt == 6) { // Quit
 		return std::make_unique<ExitState>(ExitState{});
 	}
 	return std::make_unique<MainState>(*this);
