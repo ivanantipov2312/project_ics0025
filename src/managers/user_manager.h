@@ -1,6 +1,7 @@
 #ifndef User_MANAGER_H_
 #define User_MANAGER_H_
 #include "../core/user.h"
+#include "../io/file_reader.h"
 #include <map>
 
 // Global static queue for users
@@ -17,6 +18,7 @@ public:
 
 	void add_user(const User& user) {
 		users.insert({user.username, user});
+		reader.csv_write_row({user.username, user.email, user.password, role_to_string(user.role)});
 	}
 
 	const User* get_user(const std::string& username) {
@@ -30,6 +32,7 @@ private:
 	UserManager() {}
 	~UserManager() {}
 	std::map<std::string, User> users{};
+	FileReader reader{"../users.csv", {"Username", "Email", "Password","Role"}};
 };
 
 #endif // USER_MANAGER_H_
