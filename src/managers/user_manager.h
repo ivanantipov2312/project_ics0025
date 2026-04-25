@@ -42,7 +42,7 @@ private:
 	}
 	~UserManager() {}
 	std::map<std::string, User> users{};
-	FileReader reader{"../users.csv", {"Username", "Email", "Password","Role"}};
+	FileReader reader{"./users.csv", {"Username", "Email", "Password","Role"}};
 };
 
 #endif // USER_MANAGER_H_
