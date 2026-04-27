@@ -5,10 +5,10 @@
 #include "../managers/UserManager.hpp"
 #include "../io/Logger.hpp"
 
-void MainState::handle_events(StateManager& manager) const {
-	int opt = menu.get_option();
+void MainState::handle_events(Context& ctx) const {
+	int opt = menu.get_option(ctx.input);
 	if (opt == 1) { // Order
-		manager.change(std::make_unique<OrderState>(OrderState{}));
+		ctx.state.change(std::make_unique<OrderState>(OrderState{}));
 	} else if (opt == 2) { // List orders
 		auto q = OrderManager::get_instance().get_queue();
 		std::cout << "Your orders: " << std::endl;
@@ -22,14 +22,14 @@ void MainState::handle_events(StateManager& manager) const {
 		}
 	}
 	else if (opt == 4) { // Save current ordering list
-		std::string filepath = InputManager::get_instance().get_string("Enter filepath: ");
+		std::string filepath = ctx.input.get_string("Enter filepath: ");
 		auto q = OrderManager::get_instance().get_queue();
 		for (const auto& el : q) {
 			Logger::get_instance(filepath).log(el.to_string());
 		}
 	} else if (opt == 5) { // Logout
-		manager.change(std::make_unique<LoginState>(LoginState{}));
+		ctx.state.change(std::make_unique<LoginState>(LoginState{}));
 	} else if (opt == 6) { // Quit
-		manager.stop();
+		ctx.state.stop();
 	}
 }

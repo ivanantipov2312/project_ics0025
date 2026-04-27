@@ -1,6 +1,6 @@
 #ifndef MENU_HPP_
 #define MENU_HPP_
-#include "../managers/InputManager.hpp"
+#include "../io/InputManager.hpp"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -19,8 +19,8 @@ public:
 		}
 	}
 
-	int get_option() const {
-		return InputManager::get_instance().get_int("Your option: ", 1, options.size());
+	int get_option(InputManager& input) const {
+		return input.get_int("Your option: ", 1, options.size());
 	}
 private:
 	std::string name;

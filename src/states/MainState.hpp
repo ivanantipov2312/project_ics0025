@@ -11,7 +11,7 @@ public:
 		menu.render();
 	}
 
-	void handle_events(StateManager& manager) const override;
+	void handle_events(Context& ctx) const override;
 private:
 	Menu menu{"Main Menu", {
 		"Place an order",

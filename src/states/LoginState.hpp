@@ -10,7 +10,7 @@ public:
 		login_menu.render();
 	}
 
-	void handle_events(StateManager& manager) const override;
+	void handle_events(Context& ctx) const override;
 private:
 	Menu login_menu{"Login", {
 		"Login",

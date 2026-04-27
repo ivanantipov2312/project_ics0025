@@ -2,19 +2,19 @@
 #define APP_HPP_
 #include "../states/State.hpp"
 #include "../states/LoginState.hpp"
-#include "../managers/StateManager.hpp"
+#include "Context.hpp"
 
 class App {
 public:
 	void run() {
-		manager.change(std::make_unique<LoginState>(LoginState{}));
-		while (manager.is_running()) {
-			manager.get()->render();
-			manager.get()->handle_events(manager);
+		ctx.state.change(std::make_unique<LoginState>(LoginState{}));
+		while (ctx.state.is_running()) {
+			ctx.state.get()->render();
+			ctx.state.get()->handle_events(ctx);
 		}
 	}
 private:
-	StateManager manager{};
+	Context ctx{};
 };
 
 #endif // APP_HPP_

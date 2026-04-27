@@ -3,10 +3,10 @@
 #include "../core/Order.hpp"
 #include "../managers/OrderManager.hpp"
 
-void OrderState::handle_events(StateManager& manager) const {
+void OrderState::handle_events(Context& ctx) const {
 	std::cout << "Please, fill out the ordering details: " << std::endl;
 
-	std::string last_name = InputManager::get_instance().get_string("Enter your last name: ");
+	std::string last_name = ctx.input.get_string("Enter your last name: ");
 
 	// Menu for choosing type of order
 	Menu order_kind_selection{"Select the order type", {
@@ -16,7 +16,7 @@ void OrderState::handle_events(StateManager& manager) const {
 	}};
 
 	order_kind_selection.render();
-	int opt = order_kind_selection.get_option();
+	int opt = order_kind_selection.get_option(ctx.input);
 
 	OrderKind kind{};
 	switch (opt) {
@@ -35,7 +35,7 @@ void OrderState::handle_events(StateManager& manager) const {
 		return;
 	}
 
-	bool is_urgent = InputManager::get_instance().get_yes_or_no("Mark as urgent? (y/n): ");
+	bool is_urgent = ctx.input.get_yes_or_no("Mark as urgent? (y/n): ");
 
 	Order order{last_name, kind, is_urgent};
 	OrderManager::get_instance().add_order(order);
@@ -44,9 +44,9 @@ void OrderState::handle_events(StateManager& manager) const {
 	std::cout << "Added Order with the following information: " << std::endl;
 	order.print();
 
-	bool finished = InputManager::get_instance().get_yes_or_no("Stop ordering? (y/n): ");
+	bool finished = ctx.input.get_yes_or_no("Stop ordering? (y/n): ");
 
 	if (finished) {
-		manager.change(std::make_unique<MainState>(MainState{}));
+		ctx.state.change(std::make_unique<MainState>(MainState{}));
 	}
 }
