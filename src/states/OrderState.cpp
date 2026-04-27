@@ -1,7 +1,6 @@
 #include "OrderState.hpp"
 #include "MainState.hpp"
-#include "../core/Order.hpp"
-#include "../managers/OrderManager.hpp"
+#include "../order/Order.hpp"
 
 void OrderState::handle_events(Context& ctx) const {
 	std::cout << "Please, fill out the ordering details: " << std::endl;
@@ -38,7 +37,7 @@ void OrderState::handle_events(Context& ctx) const {
 	bool is_urgent = ctx.input.get_yes_or_no("Mark as urgent? (y/n): ");
 
 	Order order{last_name, kind, is_urgent};
-	OrderManager::get_instance().add_order(order);
+	ctx.order_queue.add_order(order);
 
 	// Print the added data
 	std::cout << "Added Order with the following information: " << std::endl;
