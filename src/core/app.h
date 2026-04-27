@@ -10,13 +10,14 @@
 class App {
 public:
 	void run() {
-		StateManager manager{std::make_unique<LoginState>(LoginState{})};
+		manager.change(std::make_unique<LoginState>(LoginState{}));
 		while (manager.is_running()) {
 			manager.get()->render();
 			manager.get()->handle_events(manager);
 		}
 	}
 private:
+	StateManager manager{};
 };
 
 #endif // APP_H_

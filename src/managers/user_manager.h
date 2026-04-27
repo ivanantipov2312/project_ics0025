@@ -27,6 +27,17 @@ public:
 		}
 		return &users.at(username);
 	}
+
+	const std::vector<User> get_users_by_role(Role role) {
+		std::vector<User> res{};
+		for (const auto& u : users) {
+			if (u.second.role == role) {
+				res.push_back(u.second);
+			}
+		}
+		return res;
+
+	}
 private:
 	// Disallow manual construction of the objects (only through get_instance())
 	UserManager() {

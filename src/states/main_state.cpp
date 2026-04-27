@@ -11,8 +11,10 @@ void MainState::handle_events(StateManager& manager) const {
 			el.print();
 		}
 	} else if (opt == 3) { // List photographers
-		// TODO: Add photographer logic here
-		std::cout << "This functionality is not implemented yet!";
+		auto photographers = UserManager::get_instance().get_users_by_role(Role::Photographer);
+		for (const auto& el : photographers) {
+			std::cout << el.username << " | " << el.email << std::endl;
+		}
 	}
 	else if (opt == 4) { // Save current ordering list
 		std::string filepath = InputManager::get_instance().get_string("Enter filepath: ");

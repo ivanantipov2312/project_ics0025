@@ -6,7 +6,6 @@ class State;
 
 class StateManager {
 public:
-	StateManager(std::unique_ptr<State> initial) : current(std::move(initial)) {}
 	void change(std::unique_ptr<State> s) {
 		current = std::move(s);
 	}
