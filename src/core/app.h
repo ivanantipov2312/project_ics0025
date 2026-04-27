@@ -3,26 +3,20 @@
 #include <iostream>
 #include <memory>
 #include "menu.h"
-#include "state.h"
+#include "../states/state.h"
+#include "../states/login_state.h"
+#include "../managers/state_manager.h"
 
 class App {
 public:
 	void run() {
-		while (is_running) {
-			current_state->render();
-
-			// If got any state, switch to it. Exit otherwise
-			auto next_state = current_state->handle_events();
-			if (!next_state) {
-				is_running = false;
-			}
-
-			current_state = std::move(next_state);
+		StateManager manager{std::make_unique<LoginState>(LoginState{})};
+		while (manager.is_running()) {
+			manager.get()->render();
+			manager.get()->handle_events(manager);
 		}
 	}
 private:
-	std::unique_ptr<State> current_state = std::make_unique<LoginState>(LoginState{});
-	bool is_running = true;
 };
 
 #endif // APP_H_
