@@ -1,5 +1,5 @@
-#ifndef LOGGER_H_
-#define LOGGER_H_
+#ifndef LOGGER_HPP_
+#define LOGGER_HPP_
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -34,4 +34,4 @@ private:
 	std::ofstream stream{};
 };
 
-#endif // LOGGER_H_
+#endif // LOGGER_HPP_

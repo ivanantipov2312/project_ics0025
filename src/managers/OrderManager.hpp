@@ -1,6 +1,6 @@
-#ifndef ORDER_MANAGER_H_
-#define ORDER_MANAGER_H_
-#include "../core/order.h"
+#ifndef ORDER_MANAGER_HPP_
+#define ORDER_MANAGER_HPP_
+#include "../core/Order.hpp"
 #include <deque>
 
 // Global static queue for orders
@@ -35,4 +35,4 @@ private:
 	std::deque<Order> order_queue;
 };
 
-#endif // ORDER_MANAGER_H_
+#endif // ORDER_MANAGER_HPP_

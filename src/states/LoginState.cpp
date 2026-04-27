@@ -1,5 +1,6 @@
-#include "login_state.h"
-#include "main_state.h"
+#include "LoginState.hpp"
+#include "MainState.hpp"
+#include "../managers/UserManager.hpp"
 
 void LoginState::handle_events(StateManager& manager) const {
 	int opt = login_menu.get_option();

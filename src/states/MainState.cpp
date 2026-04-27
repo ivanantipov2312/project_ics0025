@@ -1,4 +1,9 @@
-#include "main_state.h"
+#include "MainState.hpp"
+#include "OrderState.hpp"
+#include "LoginState.hpp"
+#include "../managers/OrderManager.hpp"
+#include "../managers/UserManager.hpp"
+#include "../io/Logger.hpp"
 
 void MainState::handle_events(StateManager& manager) const {
 	int opt = menu.get_option();

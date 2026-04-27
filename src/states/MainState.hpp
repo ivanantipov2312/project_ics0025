@@ -1,9 +1,7 @@
-#ifndef MAIN_STATE_H_
-#define MAIN_STATE_H_
-#include "state.h"
-#include "order_state.h"
-#include "login_state.h"
-#include "../managers/logger.h"
+#ifndef MAIN_STATE_HPP_
+#define MAIN_STATE_HPP_
+#include "State.hpp"
+#include "../io/Menu.hpp"
 
 // TODO: Add special menu for photographer
 // Main loop
@@ -25,4 +23,4 @@ private:
 	}};
 };
 
-#endif // !MAIN_STATE_H_
+#endif // !MAIN_STATE_HPP_

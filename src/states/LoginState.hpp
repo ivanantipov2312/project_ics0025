@@ -1,7 +1,7 @@
-#ifndef LOGIN_STATE_H_
-#define LOGIN_STATE_H_
-#include "state.h"
-#include "../managers/user_manager.h"
+#ifndef LOGIN_STATE_HPP_
+#define LOGIN_STATE_HPP_
+#include "State.hpp"
+#include "../io/Menu.hpp"
 
 // State for logging in
 class LoginState : public State {
@@ -19,4 +19,4 @@ private:
 	}};
 };
 
-#endif // LOGIN_STATE_H_
+#endif // LOGIN_STATE_HPP_

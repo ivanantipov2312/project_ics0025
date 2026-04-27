@@ -1,8 +1,6 @@
-#ifndef STATE_H_
-#define STATE_H_
-#include "../io/menu.h"
-#include "../managers/state_manager.h"
-#include <memory>
+#ifndef STATE_HPP_
+#define STATE_HPP_
+#include "../managers/StateManager.hpp"
 
 // Basic interface for states
 class State {
@@ -15,4 +13,4 @@ public:
 	virtual void render() const = 0;
 };
 
-#endif // STATE_H_
+#endif // STATE_HPP_

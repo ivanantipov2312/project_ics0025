@@ -1,6 +1,6 @@
-#ifndef MENU_H_
-#define MENU_H_
-#include "../managers/input_manager.h"
+#ifndef MENU_HPP_
+#define MENU_HPP_
+#include "../managers/InputManager.hpp"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -27,4 +27,4 @@ private:
 	std::vector<std::string> options;
 };
 
-#endif // MENU_H_
+#endif // MENU_HPP_

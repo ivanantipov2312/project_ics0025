@@ -1,5 +1,5 @@
-#ifndef ORDER_H_
-#define ORDER_H_
+#ifndef ORDER_HPP_
+#define ORDER_HPP_
 #include <string>
 #include <iostream>
 
@@ -39,4 +39,4 @@ struct Order {
 	}
 };
 
-#endif // ORDER_H_
+#endif // ORDER_HPP_

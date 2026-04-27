@@ -1,5 +1,5 @@
-#ifndef FILE_READER_H_
-#define FILE_READER_H_
+#ifndef FILE_READER_HPP_
+#define FILE_READER_HPP_
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -53,4 +53,4 @@ private:
 	std::fstream buffer{""};
 };
 
-#endif // FILE_READER_H_
+#endif // FILE_READER_HPP_

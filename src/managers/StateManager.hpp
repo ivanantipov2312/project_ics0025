@@ -1,5 +1,5 @@
-#ifndef STATE_MANAGER_H_
-#define STATE_MANAGER_H_
+#ifndef STATE_MANAGER_HPP_
+#define STATE_MANAGER_HPP_
 #include <memory>
 
 class State;
@@ -26,4 +26,4 @@ private:
 	bool running = true;
 };
 
-#endif // STATE_MANAGER_H_
+#endif // STATE_MANAGER_HPP_

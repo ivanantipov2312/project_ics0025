@@ -1,19 +1,10 @@
-#ifndef INPUT_MANAGER_H_
-#define INPUT_MANAGER_H_
+#ifndef INPUT_MANAGER_HPP_
+#define INPUT_MANAGER_HPP_
 #include <iostream>
 
 // Singleton for getting input
 class InputManager {
 public:
-	// Disallow any copying of objects of this class
-	InputManager(const InputManager&) = delete;
-	InputManager& operator=(const InputManager&) = delete;
-
-	static InputManager& get_instance() {
-		static InputManager instance{};
-		return instance;
-	}
-
 	int get_int(const std::string& prompt, int min, int max) {
 		while (true) {
 			std::cout << prompt;
@@ -65,4 +56,4 @@ private:
 	~InputManager() {}
 };
 
-#endif // InputManager
+#endif // INPUT_MANAGER_HPP_

@@ -1,5 +1,5 @@
-#ifndef USER_H_
-#define USER_H_
+#ifndef USER_HPP_
+#define USER_HPP_
 #include <string>
 
 enum class Role {
@@ -34,4 +34,4 @@ struct User {
 	Role role{Role::Customer};
 };
 
-#endif // USER_H_
+#endif // USER_HPP_

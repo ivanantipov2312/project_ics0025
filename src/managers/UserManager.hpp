@@ -1,7 +1,7 @@
-#ifndef User_MANAGER_H_
-#define User_MANAGER_H_
-#include "../core/user.h"
-#include "../io/file_reader.h"
+#ifndef User_MANAGER_HPP_
+#define User_MANAGER_HPP_
+#include "../core/User.hpp"
+#include "../io/FileReader.hpp"
 #include <map>
 
 // Global static queue for users
@@ -56,4 +56,4 @@ private:
 	FileReader reader{"./users.csv", {"Username", "Email", "Password","Role"}};
 };
 
-#endif // USER_MANAGER_H_
+#endif // USER_MANAGER_HPP_

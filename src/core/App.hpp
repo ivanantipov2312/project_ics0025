@@ -1,11 +1,8 @@
-#ifndef APP_H_
-#define APP_H_
-#include <iostream>
-#include <memory>
-#include "menu.h"
-#include "../states/state.h"
-#include "../states/login_state.h"
-#include "../managers/state_manager.h"
+#ifndef APP_HPP_
+#define APP_HPP_
+#include "../states/State.hpp"
+#include "../states/LoginState.hpp"
+#include "../managers/StateManager.hpp"
 
 class App {
 public:
@@ -20,4 +17,4 @@ private:
 	StateManager manager{};
 };
 
-#endif // APP_H_
+#endif // APP_HPP_

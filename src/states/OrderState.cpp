@@ -1,5 +1,7 @@
-#include "order_state.h"
-#include "main_state.h"
+#include "OrderState.hpp"
+#include "MainState.hpp"
+#include "../core/Order.hpp"
+#include "../managers/OrderManager.hpp"
 
 void OrderState::handle_events(StateManager& manager) const {
 	std::cout << "Please, fill out the ordering details: " << std::endl;
