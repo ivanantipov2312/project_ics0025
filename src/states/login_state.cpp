@@ -16,6 +16,7 @@ void LoginState::handle_events(StateManager& manager) const {
 			std::string password = InputManager::get_instance().get_string("Password: ");
 			if (user->password == password) {
 				manager.change(std::make_unique<MainState>(MainState{})); // If correct, transfer to the main state
+				return; // Return early to exit the loop
 			}
 			std::cout << "Wrong password! (" << (attempts + 1) << "/3 attempts): " << std::endl;
 			attempts++;

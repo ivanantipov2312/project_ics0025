@@ -38,7 +38,7 @@ void OrderState::handle_events(StateManager& manager) const {
 	Order order{last_name, kind, is_urgent};
 	OrderManager::get_instance().add_order(order);
 
-		// Print the added data
+	// Print the added data
 	std::cout << "Added Order with the following information: " << std::endl;
 	order.print();
 
