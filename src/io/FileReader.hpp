@@ -28,6 +28,9 @@ public:
 		contents << buffer.rdbuf();
 		std::vector<std::vector<std::string>> rows{};
 		std::string row;
+
+		std::getline(contents, row, '\n'); // Skip the headers
+
 		while (std::getline(contents, row, '\n')) { // Split by newline
 			std::vector<std::string> row_split{};
 			std::stringstream sstr{row};

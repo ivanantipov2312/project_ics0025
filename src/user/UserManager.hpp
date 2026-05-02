@@ -13,7 +13,7 @@ public:
 		for (const auto& row : rows) {
 			if (row.size() == 5) {
 				users.insert({
-					row.at(0), {
+					row.at(1), {
 						std::stoi(row.at(0)), // ID
 						row.at(1), // Uername
 						row.at(2), // Email
