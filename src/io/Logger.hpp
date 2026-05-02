@@ -27,13 +27,13 @@ public:
 
 		switch (level) {
 		case LogLevel::Error:
-			std::cout << "[ERROR] ";
+			stream << "[ERROR] ";
 			break;
 		case LogLevel::Info:
-			std::cout << "[INFO] ";
+			stream << "[INFO] ";
 			break;
 		case LogLevel::Warn:
-			std::cout << "[WARN] ";
+			stream << "[WARN] ";
 			break;
 		default:
 			break;

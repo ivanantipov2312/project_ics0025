@@ -31,14 +31,26 @@ public:
 				ret.push_back(o);
 			}
 		}
+
+		if (ret.empty()) {
+			throw NoOrdersFoundException{};
+		}
+
 		return ret;
 	}
 
 	const std::deque<Order>& get_queue() const {
+		if (order_queue.empty()) {
+			throw NoOrdersFoundException{};
+		}
 		return order_queue;
 	}
 
 	Order pop_order() {
+		if (order_queue.empty()) {
+			throw NoOrdersFoundException{};
+		}
+
 		Order current_item = order_queue.front();
 		order_queue.pop_front();
 		return current_item;

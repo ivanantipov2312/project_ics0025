@@ -37,6 +37,8 @@ public:
 				});
 			}
 		}
+
+		next_id = users.size() + 1;
 	}
 	~UserManager() {}
 

@@ -21,7 +21,7 @@ void LoginState::handle_events(Context& ctx) const {
 			}
 		} catch (const UserNotFoundException& e) {
 			std::cout << "User with this username does not exist!" << std::endl;
-			ctx.logger.log(LogLevel::Error, "User not found");
+			ctx.logger.log(LogLevel::Error, "Login failed: User not found");
 			return;
 		}
 	} else if (opt == 2) { // Register
@@ -35,7 +35,7 @@ void LoginState::handle_events(Context& ctx) const {
 			ctx.state.change(std::make_unique<MainState>(MainState{u}));
 		} catch (const UserAlreadyExistsException& e) {
 			std::cout << "User with this name already exists!" << std::endl;
-			ctx.logger.log(LogLevel::Error, "User already exists");
+			ctx.logger.log(LogLevel::Error, "Register failed: User already exists");
 			return;
 		}
 	} else if (opt == 3) { // Exit
