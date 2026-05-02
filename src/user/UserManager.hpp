@@ -4,6 +4,20 @@
 #include "../io/FileReader.hpp"
 #include "../crypto/djb2.hpp"
 #include <map>
+#include <exception>
+
+class UserNotFoundException : public std::exception {
+	const char* what() const noexcept override {
+		return "UserNotFound";
+	}
+};
+
+class UserAlreadyExistsException : public std::exception {
+public:
+	const char* what() const noexcept override {
+		return "UserAlreadyExists";
+	}
+};
 
 // Global queue for users
 class UserManager {
@@ -27,6 +41,10 @@ public:
 	~UserManager() {}
 
 	const User& add_user(const std::string& username, const std::string& email, const std::string& password, Role role) {
+		if (users.find(username) != users.end()) {
+			throw UserAlreadyExistsException{};
+		}
+
 		uint64_t pw_hash = hasher.get_str_hash(password);
 
 		User user{
@@ -50,15 +68,15 @@ public:
 		return inserted.first->second;
 	}
 
-	const User* get_user(const std::string& username) {
+	const User& get_user(const std::string& username) {
 		if (users.find(username) == users.end()) {
-			return nullptr;
+			throw UserNotFoundException{};
 		}
-		return &users.at(username);
+		return users.at(username);
 	}
 
-	bool verify_user_password(const User* u, const std::string& password) const {
-		return hasher.verify_password(password, u->password_hash);
+	bool verify_user_password(const User& u, const std::string& password) const {
+		return hasher.verify_password(password, u.password_hash);
 	}
 
 	const std::vector<User> get_users_by_role(Role role) {

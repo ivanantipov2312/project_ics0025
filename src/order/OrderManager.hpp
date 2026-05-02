@@ -3,6 +3,14 @@
 #include "Order.hpp"
 #include <deque>
 #include <vector>
+#include <exception>
+
+class NoOrdersFoundException : public std::exception {
+public:
+	const char* what() const noexcept override {
+		return "NoOrdersFound";
+	}
+};
 
 // Global static queue for orders
 class OrderManager {
