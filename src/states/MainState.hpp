@@ -7,6 +7,8 @@
 // Main loop
 class MainState : public State {
 public:
+	MainState(const User& current_user) : current_user{current_user} {}
+
 	void render() const override {
 		menu.render();
 	}
@@ -21,6 +23,8 @@ private:
 		"Logout",
 		"Quit"
 	}};
+
+	User current_user;
 };
 
 #endif // !MAIN_STATE_HPP_

@@ -1,6 +1,7 @@
 #ifndef USER_HPP_
 #define USER_HPP_
 #include <string>
+#include <cstdint>
 
 enum class Role {
 	Admin,
@@ -28,9 +29,10 @@ inline Role string_to_role(const std::string& role) {
 }
 
 struct User {
+	int user_id{};
 	std::string username{};
 	std::string email{};
-	std::string password{}; // TODO: Implement simple hashing
+	uint64_t password_hash{};
 	Role role{Role::Customer};
 };
 

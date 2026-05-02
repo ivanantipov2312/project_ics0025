@@ -6,7 +6,7 @@
 void MainState::handle_events(Context& ctx) const {
 	int opt = menu.get_option(ctx.input);
 	if (opt == 1) { // Order
-		ctx.state.change(std::make_unique<OrderState>(OrderState{}));
+		ctx.state.change(std::make_unique<OrderState>(OrderState{current_user}));
 	} else if (opt == 2) { // List orders
 		auto q = ctx.order_queue.get_queue();
 		std::cout << "Your orders: " << std::endl;

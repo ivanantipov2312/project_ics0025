@@ -46,6 +46,6 @@ void OrderState::handle_events(Context& ctx) const {
 	bool finished = ctx.input.get_yes_or_no("Stop ordering? (y/n): ");
 
 	if (finished) {
-		ctx.state.change(std::make_unique<MainState>(MainState{}));
+		ctx.state.change(std::make_unique<MainState>(MainState{ordering_user}));
 	}
 }
