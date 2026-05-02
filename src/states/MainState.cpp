@@ -1,7 +1,6 @@
 #include "MainState.hpp"
 #include "OrderState.hpp"
 #include "LoginState.hpp"
-#include "../io/Logger.hpp"
 
 void MainState::handle_events(Context& ctx) const {
 	int opt = menu.get_option(ctx.input);
@@ -23,7 +22,7 @@ void MainState::handle_events(Context& ctx) const {
 		std::string filepath = ctx.input.get_string("Enter filepath: ");
 		auto q = ctx.order_queue.get_orders_from_user(current_user.user_id);
 		for (const auto& el : q) {
-			Logger::get_instance(filepath).log(el.to_string());
+			el.print();
 		}
 	} else if (opt == 5) { // Logout
 		ctx.state.change(std::make_unique<LoginState>(LoginState{}));

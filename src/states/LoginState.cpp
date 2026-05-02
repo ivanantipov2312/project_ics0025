@@ -13,6 +13,7 @@ void LoginState::handle_events(Context& ctx) const {
 				std::string password = ctx.input.get_string("Password: ");
 				if (ctx.users.verify_user_password(user, password)) {
 					ctx.state.change(std::make_unique<MainState>(user)); // If correct, transfer to the main state
+					ctx.logger.log(LogLevel::Info, "Logged in");
 					return; // Return early to exit the loop
 				}
 				std::cout << "Wrong password! (" << (attempts + 1) << "/3 attempts): " << std::endl;
@@ -20,6 +21,7 @@ void LoginState::handle_events(Context& ctx) const {
 			}
 		} catch (const UserNotFoundException& e) {
 			std::cout << "User with this username does not exist!" << std::endl;
+			ctx.logger.log(LogLevel::Error, "User not found");
 			return;
 		}
 	} else if (opt == 2) { // Register
@@ -33,6 +35,7 @@ void LoginState::handle_events(Context& ctx) const {
 			ctx.state.change(std::make_unique<MainState>(MainState{u}));
 		} catch (const UserAlreadyExistsException& e) {
 			std::cout << "User with this name already exists!" << std::endl;
+			ctx.logger.log(LogLevel::Error, "User already exists");
 			return;
 		}
 	} else if (opt == 3) { // Exit

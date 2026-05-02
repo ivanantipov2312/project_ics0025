@@ -3,35 +3,51 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <mutex>
 
-// Simple logger for abstracting file input
+enum class LogLevel {
+	Info,
+	Warn,
+	Error,
+};
+
+// Simple logger for abstracting system messages
 class Logger {
 public:
-	// Disallow any copying of objects of this class
-	Logger(const Logger&) = delete;
-	Logger& operator=(const Logger&) = delete;
+	Logger(const std::string& filepath) : stream{filepath} {}
+	~Logger() { stream.close(); }
+	
+	void log(LogLevel level, const std::string& text) {
+		std::lock_guard<std::mutex> lock{mtx};
 
-	static Logger& get_instance(const std::string& filepath = "") {
-		static Logger instance{filepath};
-		return instance;
-	}
-
-	void log(const std::string& text) {
 		if (!stream.is_open()) {
 			std::cout << "Error: Log file is inaccessible!" << std::endl;
 			return;
 		}
-		stream << text;
+
+		switch (level) {
+		case LogLevel::Error:
+			std::cout << "[ERROR] ";
+			break;
+		case LogLevel::Info:
+			std::cout << "[INFO] ";
+			break;
+		case LogLevel::Warn:
+			std::cout << "[WARN] ";
+			break;
+		default:
+			break;
+		};
+
+		stream << text << std::endl;
 	}
 
 	void clear() {
 		stream.clear();
 	}
 private:
-	// Disallow manual construction of the objects (only through get_instance())
-	Logger(const std::string& filepath) : stream{filepath} {}
-	~Logger() { stream.close(); }
 	std::ofstream stream{};
+	std::mutex mtx{};
 };
 
 #endif // LOGGER_HPP_
