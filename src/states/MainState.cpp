@@ -8,7 +8,7 @@ void MainState::handle_events(Context& ctx) const {
 	if (opt == 1) { // Order
 		ctx.state.change(std::make_unique<OrderState>(OrderState{current_user}));
 	} else if (opt == 2) { // List orders
-		auto q = ctx.order_queue.get_queue();
+		auto q = ctx.order_queue.get_orders_from_user(current_user.user_id);
 		std::cout << "Your orders: " << std::endl;
 		for (const auto& el : q) {
 			el.print();
@@ -21,7 +21,7 @@ void MainState::handle_events(Context& ctx) const {
 	}
 	else if (opt == 4) { // Save current ordering list
 		std::string filepath = ctx.input.get_string("Enter filepath: ");
-		auto q = ctx.order_queue.get_queue();
+		auto q = ctx.order_queue.get_orders_from_user(current_user.user_id);
 		for (const auto& el : q) {
 			Logger::get_instance(filepath).log(el.to_string());
 		}

@@ -2,6 +2,7 @@
 #define ORDER_MANAGER_HPP_
 #include "Order.hpp"
 #include <deque>
+#include <vector>
 
 // Global static queue for orders
 class OrderManager {
@@ -13,6 +14,16 @@ public:
 
 	void add_order(const Order& order) {
 		order_queue.push_back(order);
+	}
+
+	const std::vector<Order> get_orders_from_user(int user_id) const {
+		std::vector<Order> ret{};
+		for (const auto& o : order_queue) {
+			if (o.user_id == user_id) {
+				ret.push_back(o);
+			}
+		}
+		return ret;
 	}
 
 	const std::deque<Order>& get_queue() const {

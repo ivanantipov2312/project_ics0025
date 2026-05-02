@@ -36,7 +36,7 @@ void OrderState::handle_events(Context& ctx) const {
 
 	bool is_urgent = ctx.input.get_yes_or_no("Mark as urgent? (y/n): ");
 
-	Order order{last_name, kind, is_urgent};
+	Order order{last_name, ordering_user.user_id, kind, is_urgent};
 	ctx.order_queue.add_order(order);
 
 	// Print the added data

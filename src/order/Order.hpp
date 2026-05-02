@@ -21,6 +21,7 @@ inline std::string order_kind_to_string(const OrderKind& kind) {
 // TODO: Add more details/data
 struct Order {
 	std::string customer_last_name{};
+	int user_id{};
 	OrderKind kind{};
 	bool is_urgent{false};
 
