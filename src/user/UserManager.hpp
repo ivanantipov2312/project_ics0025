@@ -29,10 +29,10 @@ public:
 				users.insert({
 					row.at(1), {
 						std::stoi(row.at(0)), // ID
-						row.at(1), // Uername
+						row.at(1), // Username
 						row.at(2), // Email
 						std::stoul(row.at(3)), // PasswordHash
-						string_to_role(row.at(3)) // Role
+						string_to_role(row.at(4)) // Role
 					}
 				});
 			}

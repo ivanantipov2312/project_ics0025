@@ -1,5 +1,6 @@
 #include "LoginState.hpp"
 #include "MainState.hpp"
+#include "PhotographerState.hpp"
 
 void LoginState::handle_events(Context& ctx) const {
 	int opt = login_menu.get_option(ctx.input);
@@ -12,7 +13,11 @@ void LoginState::handle_events(Context& ctx) const {
 			while (attempts < 3) {
 				std::string password = ctx.input.get_string("Password: ");
 				if (ctx.users.verify_user_password(user, password)) {
-					ctx.state.change(std::make_unique<MainState>(user)); // If correct, transfer to the main state
+					if (user.role == Role::Customer) {
+						ctx.state.change(std::make_unique<MainState>(MainState{user}));
+					} else {
+						ctx.state.change(std::make_unique<PhotographerState>(PhotographerState{user}));
+					}
 					ctx.logger.log(LogLevel::Info, "Logged in");
 					return; // Return early to exit the loop
 				}
@@ -32,7 +37,11 @@ void LoginState::handle_events(Context& ctx) const {
 
 		try {
 			auto u = ctx.users.add_user(username, email, password, is_photographer ? Role::Photographer : Role::Customer);
-			ctx.state.change(std::make_unique<MainState>(MainState{u}));
+			if (u.role == Role::Customer) {
+				ctx.state.change(std::make_unique<MainState>(MainState{u}));
+			} else {
+				ctx.state.change(std::make_unique<PhotographerState>(PhotographerState{u}));
+			}
 		} catch (const UserAlreadyExistsException& e) {
 			std::cout << "User with this name already exists!" << std::endl;
 			ctx.logger.log(LogLevel::Error, "Register failed: User already exists");

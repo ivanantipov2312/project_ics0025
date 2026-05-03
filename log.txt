@@ -1,0 +1,2 @@
+[ERROR] Display failed: No orders found
+[ERROR] Taking order failed: No orders available

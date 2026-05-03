@@ -7,4 +7,5 @@ add_executable(app
 	src/states/LoginState.cpp
 	src/states/MainState.cpp
 	src/states/OrderState.cpp
+	src/states/PhotographerState.cpp
 )

@@ -3,7 +3,6 @@
 #include "State.hpp"
 #include "../io/Menu.hpp"
 
-// TODO: Add special menu for photographer
 // Main loop
 class MainState : public State {
 public:

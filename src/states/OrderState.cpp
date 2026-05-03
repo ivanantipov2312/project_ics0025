@@ -36,16 +36,14 @@ void OrderState::handle_events(Context& ctx) const {
 
 	bool is_urgent = ctx.input.get_yes_or_no("Mark as urgent? (y/n): ");
 
-	Order order{last_name, ordering_user.user_id, kind, is_urgent};
-	ctx.order_queue.add_order(order);
-
-	// Print the added data
-	std::cout << "Added Order with the following information: " << std::endl;
-	order.print();
+	ctx.order_queue.add_order(last_name, ordering_user.user_id, kind, is_urgent);
 
 	bool finished = ctx.input.get_yes_or_no("Stop ordering? (y/n): ");
 
 	if (finished) {
 		ctx.state.change(std::make_unique<MainState>(MainState{ordering_user}));
 	}
+
+	std::cin.clear();
+	std::cin.ignore(1000, '\n');
 }

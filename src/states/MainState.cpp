@@ -27,8 +27,9 @@ void MainState::handle_events(Context& ctx) const {
 		try {
 			auto q = ctx.order_queue.get_orders_from_user(current_user.user_id);
 			std::string filepath = ctx.input.get_string("Enter filepath: ");
+			FileReader reader{filepath, {}};
 			for (const auto& el : q) {
-				el.print();
+				reader.csv_write_row({});
 			}
 		} catch (NoOrdersFoundException& e) {
 			std::cout << "No orders to save!" << std::endl;

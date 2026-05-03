@@ -5,17 +5,21 @@
 
 class PhotographerState : public State {
 public:
+	PhotographerState(const User& photographer_user) : photographer_user{photographer_user} {}
 	void render() const override {
 		menu.render();
 	}
 
 	void handle_events(Context& ctx) const override;
 private:
-	Menu menu{"Photographer:", {
+	Menu menu{"Photographer", {
 		"See current orders",
 		"Take an order",
-		"Save orders"
+		"Save orders",
+		"Logout",
+		"Quit",
 	}};
+	User photographer_user{};
 };
 
 #endif // PHOTOGRAPHER_STATE_HPP_
